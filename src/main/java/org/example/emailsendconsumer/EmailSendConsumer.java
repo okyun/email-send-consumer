@@ -11,7 +11,8 @@ public class EmailSendConsumer {
     //email.send 프로듀서 service에서 언급되어있음.
     @KafkaListener(
             topics = "email.send",
-            groupId = "email-send-group" // 컨슈머 그룹 이름(없으면 새로 컨슈머 그룹 만듬)
+            groupId = "email-send-group" ,// 컨슈머 그룹 이름(없으면 새로 컨슈머 그룹 만듬)
+            concurrency = "3" // 멀티 쓰레드를 활용해 병렬적으로 처리할 파티션의 개수
     )
     // Spring Boot 3 + Spring Kafka 3: backoff = @Backoff(...)
     // Spring Boot 4 + Spring Kafka 4: backOff = @BackOff(...) — 클래스명 BackOff, 속성명 backOff
